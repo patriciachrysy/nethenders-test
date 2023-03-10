@@ -1,30 +1,37 @@
 class HomeController < ApplicationController
   def index
-    puts "this function is called"
-    respond_to do |format|
-      format.html { render :index, locals: { status_msg: "", evaluation: "" } }
-    end
+    @datas = ""
+    @results = []
+  end
+
+  def results
   end
 
   def evaluate
-    result = nil
-    form_status_msg = nil
-    if params.has_key? :datas and not params[:datas].blank?
-      dataArray = params[:datas].split
-      result = []
-      dataArray.each do |data|
-        varArray = data.split(',')
-        result.push(calculateReachingNuts(varArray[0].to_f, varArray[1].to_f, varArray[2].to_f, varArray[3].to_f))
+    @datas = datas_params
+    respond_to do |format|
+      if not @datas.blank?
+        dataArray = @datas.split
+        @results = []
+        dataArray.each do |data|
+          varArray = data.split(',')
+          result = {
+            d: varArray[0].to_f, 
+            n: varArray[1].to_f, 
+            f: varArray[2].to_f, 
+            c: varArray[3].to_f, 
+            res: calculateReachingNuts(varArray[0].to_f, varArray[1].to_f, varArray[2].to_f, varArray[3].to_f)
+          }
+          @results.push(result)
+        end
+        format.html { redirect_to :results, notice: @results }
+        format.json { render :index, status: 200, location: @results }
+      else
+        format.html { render :index, notice: 'Please provide datas to calculate.' }
+        format.json { render json: "Please provide some datas for analysis.", status: 400 }
       end
-      form_status_msg = 'Thank you'
-    else
-      puts "the parans are blank"
-      form_status_msg = (form_status_msg.nil? ? "" : form_status_msg) + '!Please provide some datas for analysis.!'
     end
 
-    respond_to do |format|
-      format.html { render "index", locals: { status_msg: form_status_msg, evaluation: result } }
-    end
   end
 
   private
@@ -37,5 +44,9 @@ class HomeController < ApplicationController
     kgToCity = n - totalKgEaten
 
     return kgToCity > 0 ? kgToCity : 0
+  end
+
+  def datas_params
+    params.require(:datas)
   end
 end

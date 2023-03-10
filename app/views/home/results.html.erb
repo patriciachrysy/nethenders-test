@@ -1,0 +1,29 @@
+<h1>Maximum amount of nuts reaching the city</h1>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+            <th>Distance to city</th>
+            <th>Qty of nuts</th>
+            <th>Qty of nuts per hour</th>
+            <th>maximum qty of nut to carry</th>
+            <th>maximum qty of nut to city</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% notice.each do |result| %>
+            <tr>
+                <td><%= result["d"] %></td>
+                <td><%= result["n"] %></td>
+                <td><%= result["f"] %></td>
+                <td><%= result["c"] %></td>
+                <td><%= result["res"] %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<%= link_to 'Back', root_path %>

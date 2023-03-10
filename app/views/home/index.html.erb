@@ -5,16 +5,9 @@
     <div>
         <%= label_tag "Datas" %><br />
         <%= text_area_tag "datas", nil, size: "27x7" %>
-        <% if local_assigns.has_key? :status_msg %>
-            <p><%= status_msg %></p>
-        <% end %>
+        <p id="notice"><%= notice %></p>
     </div>
 
     <%= submit_tag "Evaluate" %>
 
-<% end %>
-
-<% if local_assigns.has_key? :evaluation %>
-    <h1>Evaluation results</h1>
-    <p><%= evaluation %></p>
 <% end %>

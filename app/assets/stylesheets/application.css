@@ -13,3 +13,44 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+    text-align: center;
+}
+
+textarea {
+    width: 35rem;
+    height: 20rem;
+    border-radius: 10px;
+    border-color: lightgrey;
+}
+
+input {
+    padding: 10px 100px;
+    border-radius: 8px;
+    border-width: 1px;
+    background-color: midnightblue;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+label {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid;
+    border-color: lightgrey;
+}
+
+a {
+    font-size: 17px;
+    color: midnightblue;
+}
